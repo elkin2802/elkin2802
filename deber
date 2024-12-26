@@ -1,0 +1,31 @@
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include "imagen.h" // Reemplaza con el nombre del archivo .h generado
+
+#define SCREEN_WIDTH 128 // Ancho de la pantalla OLED
+#define SCREEN_HEIGHT 64 // Altura de la pantalla OLED
+
+// Dirección I2C de la pantalla OLED (puede variar según tu módulo)
+#define OLED_RESET    -1 // Reset no utilizado
+#define SCREEN_ADDRESS 0x3C
+
+// Crear objeto para la pantalla
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+void setup() {
+  // Inicializar pantalla OLED
+  if (!display.begin(SSD1306_I2C_ADDRESS, SCREEN_ADDRESS)) {
+    Serial.println(F("No se pudo iniciar la pantalla OLED"));
+    for (;;);
+  }
+  
+  display.clearDisplay();
+
+  // Mostrar imagen
+  display.drawBitmap(0, 0, imagen, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE);
+  display.display();
+}
+
+void loop() {
+  // Nada en el loop
+}
